@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/online_catalogue-master/online_catalogue.iml" filepath="$PROJECT_DIR$/online_catalogue-master/online_catalogue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/online_catalogue-master.iml" filepath="$PROJECT_DIR$/.idea/online_catalogue-master.iml" />
+    </modules>
+  </component>
+</project>

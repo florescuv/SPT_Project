@@ -1,0 +1,27 @@
+server:
+  port: 7000
+spring:
+  datasource:
+    url: jdbc:h2:mem:demo-example
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: "true"
+        format_sql: "true"
+        ddl-auto: "none"
+        hbm2ddl:
+          auto: "none"
+    show-sql: true
+    database-platform: "org.hibernate.dialect.H2Dialect"
+logging:
+  level:
+    org:
+      hibernate:
+        stat: debug
+        type: debug

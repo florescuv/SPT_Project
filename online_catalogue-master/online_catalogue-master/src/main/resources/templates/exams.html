@@ -1,0 +1,458 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <title>Calendar Examene</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+    <!-- Bootstrap core CSS
+    <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+-->
+
+    <!-- Favicons -->
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <meta name="theme-color" content="#7952b3">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/sbadmin/css/sidebar.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" media="all" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/sbadmin/css/styles.css}">
+
+<!--    &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">-->
+<!--    &lt;!&ndash; fullCalendar &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="../plugins/fullcalendar/main.css">-->
+<!--    &lt;!&ndash; Theme style &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="../dist/css/adminlte.min.css">-->
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="home" viewBox="0 0 16 16">
+        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+    </symbol>
+    <symbol id="speedometer2" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+        <path fill-rule="evenodd"
+              d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+    </symbol>
+    <symbol id="table" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+    </symbol>
+    <symbol id="grid" viewBox="0 0 16 16">
+        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+    </symbol>
+</svg>
+
+<div class="content-left" style="float:left">
+    <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            <li class="nav-item">
+                <a href="index" class="nav-link active py-3 border-bottom" aria-current="page" title="Acasa"
+                   data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Acasa">
+                        <use xlink:href="#home"/>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="grades" class="nav-link py-3 border-bottom" title="Notele mele" data-bs-toggle="tooltip"
+                   data-bs-placement="right">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Notele mele">
+                        <use xlink:href="#speedometer2"/>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="exams" class="nav-link py-3 border-bottom" title="Programare examene" data-bs-toggle="tooltip"
+                   data-bs-placement="right">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Programare examene">
+                        <use xlink:href="#table"/>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="courses" class="nav-link py-3 border-bottom" title="Cursurile mele" data-bs-toggle="tooltip"
+                   data-bs-placement="right">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Cursurile mele">
+                        <use xlink:href="#grid"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="content-right" style="float:rigth">
+    <!--    Header Start  -->
+    <header class="p-3 mb-3 border-bottom" style="float:center">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"/>
+                    </svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="index" class="nav-link px-2 link-secondary">Acasa</a></li>
+                    <li><a href="grades" class="nav-link px-2 link-dark">Notele mele</a></li>
+                    <li><a href="courses" class="nav-link px-2 link-dark">Cursurile mele</a></li>
+                    <li><a href="exams" class="nav-link px-2 link-dark">Programare examene</a></li>
+                </ul>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="logare">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--    Header End  -->
+
+    <!--            &lt;!&ndash; Main content &ndash;&gt;-->
+    <!--            <section class="content">-->
+    <!--                <div class="container-fluid">-->
+    <!--                    <div class="row">-->
+    <!--                        <div class="col-md-3">-->
+    <!--                            <div class="sticky-top mb-3">-->
+    <!--                                <div class="card">-->
+    <!--                                    <div class="card-header">-->
+    <!--                                        <h4 class="card-title">Draggable Events</h4>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="card-body">-->
+    <!--                                        &lt;!&ndash; the events &ndash;&gt;-->
+    <!--                                        <div id="external-events">-->
+    <!--                                            <div class="external-event bg-success">Lunch</div>-->
+    <!--                                            <div class="external-event bg-warning">Go home</div>-->
+    <!--                                            <div class="external-event bg-info">Do homework</div>-->
+    <!--                                            <div class="external-event bg-primary">Work on UI design</div>-->
+    <!--                                            <div class="external-event bg-danger">Sleep tight</div>-->
+    <!--                                            <div class="checkbox">-->
+    <!--                                                <label for="drop-remove">-->
+    <!--                                                    <input type="checkbox" id="drop-remove">-->
+    <!--                                                    remove after drop-->
+    <!--                                                </label>-->
+    <!--                                            </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                    &lt;!&ndash; /.card-body &ndash;&gt;-->
+    <!--                                </div>-->
+    <!--                                &lt;!&ndash; /.card &ndash;&gt;-->
+    <!--                                <div class="card">-->
+    <!--                                    <div class="card-header">-->
+    <!--                                        <h3 class="card-title">Create Event</h3>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="card-body">-->
+    <!--                                        <div class="btn-group" style="width: 100%; margin-bottom: 10px;">-->
+    <!--                                            <ul class="fc-color-picker" id="color-chooser">-->
+    <!--                                                <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>-->
+    <!--                                                <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>-->
+    <!--                                                <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>-->
+    <!--                                                <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>-->
+    <!--                                                <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>-->
+    <!--                                            </ul>-->
+    <!--                                        </div>-->
+    <!--                                        &lt;!&ndash; /btn-group &ndash;&gt;-->
+    <!--                                        <div class="input-group">-->
+    <!--                                            <input id="new-event" type="text" class="form-control" placeholder="Event Title">-->
+
+    <!--                                            <div class="input-group-append">-->
+    <!--                                                <button id="add-new-event" type="button" class="btn btn-primary">Add</button>-->
+    <!--                                            </div>-->
+    <!--                                            &lt;!&ndash; /btn-group &ndash;&gt;-->
+    <!--                                        </div>-->
+    <!--                                        &lt;!&ndash; /input-group &ndash;&gt;-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                        &lt;!&ndash; /.col &ndash;&gt;-->
+    <!--                        <div class="col-md-9">-->
+    <!--                            <div class="card card-primary">-->
+    <!--                                <div class="card-body p-0">-->
+    <!--                                    &lt;!&ndash; THE CALENDAR &ndash;&gt;-->
+    <!--                                    <div id="calendar"></div>-->
+    <!--                                </div>-->
+    <!--                                &lt;!&ndash; /.card-body &ndash;&gt;-->
+    <!--                            </div>-->
+    <!--                            &lt;!&ndash; /.card &ndash;&gt;-->
+    <!--                        </div>-->
+    <!--                        &lt;!&ndash; /.col &ndash;&gt;-->
+    <!--                    </div>-->
+    <!--                    &lt;!&ndash; /.row &ndash;&gt;-->
+    <!--                </div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+    <!--            </section>-->
+    <!--            &lt;!&ndash; /.content &ndash;&gt;-->
+
+    <!-- Grades Data Table -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header" style="float:center">
+                            <h3 class="card-title">Examenele mele</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Denumire Disciplina</th>
+                                    <th>Data</th>
+                                    <th>Ora</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="showTable : ${examen}">
+                                    <td th:text="${showTable.disciplina.nume_disciplina}"/>
+                                    <td th:text="${showTable.data}"/>
+                                    <td th:text="${showTable.ora}"/>
+                                    <td>
+                                        <form method="POST" th:action="@{/editExams}" th:object="${showTable}">
+                                            <button class="btn btn-primary" type="submit">Edit</button>
+                                            <input name="id_examen" th:value="${showTable.id}" style="visibility: hidden;">
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <div class="row justify-content-center">
+        <a class="btn btn-primary col-2 mt-5" href="addExams.html" th:href="@{/addExams}">Adauga examen</a>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+
+<script th:src="@{/sbadmin/js/scripts.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script th:src="@{/sbadmin/js/datatables-simple-demo.js}"></script>
+
+<!--&lt;!&ndash; jQuery &ndash;&gt;-->
+<!--<script th:src="@{/sbadmin/plugins/jquery/jquery.min.js}"></script>-->
+<!--&lt;!&ndash; Bootstrap &ndash;&gt;-->
+<!--<script th:src="@{/sbadmin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--&lt;!&ndash; jQuery UI &ndash;&gt;-->
+<!--<script th:src="@{/sbadmin/plugins/jquery/jquery.min.js}" src="../plugins/jquery-ui/jquery-ui.min.js"></script>-->
+<!--&lt;!&ndash; AdminLTE App &ndash;&gt;-->
+<!--<script src="../dist/js/adminlte.min.js"></script>-->
+<!--&lt;!&ndash; fullCalendar 2.2.5 &ndash;&gt;-->
+<!--<script src="../plugins/moment/moment.min.js"></script>-->
+<!--<script src="../plugins/fullcalendar/main.js"></script>-->
+<!--&lt;!&ndash; AdminLTE for demo purposes &ndash;&gt;-->
+<!--<script src="../dist/js/demo.js"></script>-->
+<!--&lt;!&ndash; Page specific script &ndash;&gt;-->
+<!--<script>-->
+<!--  $(function () {-->
+
+<!--    /* initialize the external events-->
+<!--     -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+<!--    function ini_events(ele) {-->
+<!--      ele.each(function () {-->
+
+<!--        // create an Event Object (https://fullcalendar.io/docs/event-object)-->
+<!--        // it doesn't need to have a start or end-->
+<!--        var eventObject = {-->
+<!--          title: $.trim($(this).text()) // use the element's text as the event title-->
+<!--        }-->
+
+<!--        // store the Event Object in the DOM element so we can get to it later-->
+<!--        $(this).data('eventObject', eventObject)-->
+
+<!--        // make the event draggable using jQuery UI-->
+<!--        $(this).draggable({-->
+<!--          zIndex        : 1070,-->
+<!--          revert        : true, // will cause the event to go back to its-->
+<!--          revertDuration: 0  //  original position after the drag-->
+<!--        })-->
+
+<!--      })-->
+<!--    }-->
+
+<!--    ini_events($('#external-events div.external-event'))-->
+
+<!--    /* initialize the calendar-->
+<!--     -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+<!--    //Date for the calendar events (dummy data)-->
+<!--    var date = new Date()-->
+<!--    var d    = date.getDate(),-->
+<!--        m    = date.getMonth(),-->
+<!--        y    = date.getFullYear()-->
+
+<!--    var Calendar = FullCalendar.Calendar;-->
+<!--    var Draggable = FullCalendar.Draggable;-->
+
+<!--    var containerEl = document.getElementById('external-events');-->
+<!--    var checkbox = document.getElementById('drop-remove');-->
+<!--    var calendarEl = document.getElementById('calendar');-->
+
+<!--    // initialize the external events-->
+<!--    // -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--    new Draggable(containerEl, {-->
+<!--      itemSelector: '.external-event',-->
+<!--      eventData: function(eventEl) {-->
+<!--        return {-->
+<!--          title: eventEl.innerText,-->
+<!--          backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),-->
+<!--          borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),-->
+<!--          textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),-->
+<!--        };-->
+<!--      }-->
+<!--    });-->
+
+<!--    var calendar = new Calendar(calendarEl, {-->
+<!--      headerToolbar: {-->
+<!--        left  : 'prev,next today',-->
+<!--        center: 'title',-->
+<!--        right : 'dayGridMonth,timeGridWeek,timeGridDay'-->
+<!--      },-->
+<!--      themeSystem: 'bootstrap',-->
+<!--      //Random default events-->
+<!--      events: [-->
+<!--        {-->
+<!--          title          : 'All Day Event',-->
+<!--          start          : new Date(y, m, 1),-->
+<!--          backgroundColor: '#f56954', //red-->
+<!--          borderColor    : '#f56954', //red-->
+<!--          allDay         : true-->
+<!--        },-->
+<!--        {-->
+<!--          title          : 'Meeting',-->
+<!--          start          : new Date(y, m, d, 10, 30),-->
+<!--          allDay         : false,-->
+<!--          backgroundColor: '#0073b7', //Blue-->
+<!--          borderColor    : '#0073b7' //Blue-->
+<!--        },-->
+<!--        {-->
+<!--          title          : 'Lunch',-->
+<!--          start          : new Date(y, m, d, 12, 0),-->
+<!--          end            : new Date(y, m, d, 14, 0),-->
+<!--          allDay         : false,-->
+<!--          backgroundColor: '#00c0ef', //Info (aqua)-->
+<!--          borderColor    : '#00c0ef' //Info (aqua)-->
+<!--        },-->
+<!--        {-->
+<!--          title          : 'Birthday Party',-->
+<!--          start          : new Date(y, m, d + 1, 19, 0),-->
+<!--          end            : new Date(y, m, d + 1, 22, 30),-->
+<!--          allDay         : false,-->
+<!--          backgroundColor: '#00a65a', //Success (green)-->
+<!--          borderColor    : '#00a65a' //Success (green)-->
+<!--        },-->
+<!--        {-->
+<!--          title          : 'Click for Google',-->
+<!--          start          : new Date(y, m, 28),-->
+<!--          end            : new Date(y, m, 29),-->
+<!--          url            : 'https://www.google.com/',-->
+<!--          backgroundColor: '#3c8dbc', //Primary (light-blue)-->
+<!--          borderColor    : '#3c8dbc' //Primary (light-blue)-->
+<!--        }-->
+<!--      ],-->
+<!--      editable  : true,-->
+<!--      droppable : true, // this allows things to be dropped onto the calendar !!!-->
+<!--      drop      : function(info) {-->
+<!--        // is the "remove after drop" checkbox checked?-->
+<!--        if (checkbox.checked) {-->
+<!--          // if so, remove the element from the "Draggable Events" list-->
+<!--          info.draggedEl.parentNode.removeChild(info.draggedEl);-->
+<!--        }-->
+<!--      }-->
+<!--    });-->
+
+<!--    calendar.render();-->
+<!--    // $('#calendar').fullCalendar()-->
+
+<!--    /* ADDING EVENTS */-->
+<!--    var currColor = '#3c8dbc' //Red by default-->
+<!--    // Color chooser button-->
+<!--    $('#color-chooser > li > a').click(function (e) {-->
+<!--      e.preventDefault()-->
+<!--      // Save color-->
+<!--      currColor = $(this).css('color')-->
+<!--      // Add color effect to button-->
+<!--      $('#add-new-event').css({-->
+<!--        'background-color': currColor,-->
+<!--        'border-color'    : currColor-->
+<!--      })-->
+<!--    })-->
+<!--    $('#add-new-event').click(function (e) {-->
+<!--      e.preventDefault()-->
+<!--      // Get value and make sure it is not null-->
+<!--      var val = $('#new-event').val()-->
+<!--      if (val.length == 0) {-->
+<!--        return-->
+<!--      }-->
+
+<!--      // Create events-->
+<!--      var event = $('<div />')-->
+<!--      event.css({-->
+<!--        'background-color': currColor,-->
+<!--        'border-color'    : currColor,-->
+<!--        'color'           : '#fff'-->
+<!--      }).addClass('external-event')-->
+<!--      event.text(val)-->
+<!--      $('#external-events').prepend(event)-->
+
+<!--      // Add draggable funtionality-->
+<!--      ini_events(event)-->
+
+<!--      // Remove event from text input-->
+<!--      $('#new-event').val('')-->
+<!--    })-->
+<!--  })-->
+<!--</script>-->
+</body>
+</html>
