@@ -50,3 +50,5 @@ Aplicatia ne permite sa vizualizam si sa editam materiile, notele si orele la ca
   </tr>
   
 </table>
+
+![Arhitectura](https://user-images.githubusercontent.com/100287313/217187095-0eeab9bb-5592-4ec5-8ebe-a60667a0badf.png)
